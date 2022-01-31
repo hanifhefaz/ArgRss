@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Arg Rss Reader</string>
+    <string name="try_again">Reconnect</string>
+    <string name="TextV1">TextView1</string>
+    <string name="TextV2">TextView2</string>
+    <string name="TextV3">TextView3</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         if(isNetworkAvailable(this)){
             new ProcessInBackground().execute();
 
+
         }else {
             try {
                 db.open();
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     public class ProcessInBackground extends AsyncTask<Integer, Void, Exception> {
         ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
 
+
+
         Exception exception = null;
 
         @Override
@@ -85,13 +88,14 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.setMessage("Fetching Latest News!");
             progressDialog.show();
 
+
         }
 
         @Override
         protected Exception doInBackground(Integer... integers) {
             try {
                 // rss feed site here
-                URL url = new URL("https://moxie.foxnews.com/feedburner/world.xml");
+                URL url = new URL("https://moxie.foxnews.com/feedburner/sports.xml");
 
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                 DocumentBuilder db = dbf.newDocumentBuilder();
@@ -133,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
                         news_item.description =" ";
                     }
 
-
-
                     NodeList image = parentItem.getElementsByTagName("media:group");
                     Element element_image = (Element) image.item(0);
                     NodeList image_content = element_image.getElementsByTagName("media:content");
@@ -142,18 +144,17 @@ public class MainActivity extends AppCompatActivity {
                     news_item.image = image_content_element.getAttribute("url");
 //                    Log.e("IMAGE:",news_item.image);
 
-
-
-
-
-
-
-
                     news.add(news_item);
+
+
 
                     //////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
                 }
+
+
 
 
             } catch (MalformedURLException e) {
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("IMAGE:","4");
             }
             return null;
+
         }
 
         @Override
@@ -191,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
                 throwables.printStackTrace();
             }
 /////////////////////////////////////////////////////////////////////////////
+
+
             progressDialog.dismiss();
 
         }

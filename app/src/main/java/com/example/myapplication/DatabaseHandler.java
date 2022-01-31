@@ -45,11 +45,23 @@ public class DatabaseHandler {
         database.insert("news" , "writerName", cv);
     }
 
+//    public void updateNewsInfo(NewsInformation newsInfo) {
+//        ContentValues cv = new ContentValues();
+//        cv.put("link"          ,  newsInfo.link );
+//        cv.put("title"           ,  newsInfo.title );
+//        cv.put("pubDate"        ,  newsInfo.pubDate );
+//        cv.put("description"        ,  newsInfo.description );
+//        cv.put("image"        ,  newsInfo.image );
+//
+//
+//        database.update("news",cv,"link=?", new String[]{newsInfo.link});
+//    }
+
 
     public ArrayList<NewsInformation> getAllNews() {
         ArrayList<NewsInformation> NewsInfoList = new ArrayList<NewsInformation>();
 
-        Cursor cursor = database.rawQuery("SELECT * FROM  news ORDER BY pubDate DESC" ,new String[]{});
+        Cursor cursor = database.rawQuery("SELECT DISTINCT title, description, pubDate FROM  news ORDER BY pubDate DESC" ,new String[]{});
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -57,8 +69,8 @@ public class DatabaseHandler {
 
 //            newsInfo.link = cursor.getString(0);
             newsInfo.title = cursor.getString(0);
-            newsInfo.pubDate = cursor.getString(1);
-            newsInfo.description = cursor.getString(2);
+            newsInfo.description = cursor.getString(1);
+            newsInfo.pubDate = cursor.getString(2);
 //            newsInfo.image = cursor.getString(4);
 
             NewsInfoList.add(newsInfo);

@@ -27,9 +27,6 @@ public class DatabaseHandler {
         dbHelper.close();
     }
 
-    public void loadImage(String news) {
-        database.delete( "news", null, null);
-    }
 
     //news table method
 
@@ -44,18 +41,6 @@ public class DatabaseHandler {
 
         database.insert("news" , "writerName", cv);
     }
-
-//    public void updateNewsInfo(NewsInformation newsInfo) {
-//        ContentValues cv = new ContentValues();
-//        cv.put("link"          ,  newsInfo.link );
-//        cv.put("title"           ,  newsInfo.title );
-//        cv.put("pubDate"        ,  newsInfo.pubDate );
-//        cv.put("description"        ,  newsInfo.description );
-//        cv.put("image"        ,  newsInfo.image );
-//
-//
-//        database.update("news",cv,"link=?", new String[]{newsInfo.link});
-//    }
 
 
     public ArrayList<NewsInformation> getAllNews() {

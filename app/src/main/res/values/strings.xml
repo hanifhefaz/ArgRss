@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Arg Rss Reader</string>
-    <string name="try_again">Reconnect</string>
+    <string name="try_again">Mark As Read</string>
     <string name="TextV1">TextView1</string>
     <string name="TextV2">TextView2</string>
     <string name="TextV3">TextView3</string>

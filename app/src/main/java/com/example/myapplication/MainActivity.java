@@ -78,9 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public class ProcessInBackground extends AsyncTask<Integer, Void, Exception> {
+
         ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-
-
 
         Exception exception = null;
 
@@ -88,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             progressDialog.setMessage("Fetching Latest News!");
             progressDialog.show();
-
-
         }
 
         @Override

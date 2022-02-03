@@ -68,4 +68,27 @@ public class DatabaseHandler {
         return NewsInfoList;
     }
 
+    public ArrayList<WebsitesInformation> getAllWebsites() {
+        ArrayList<WebsitesInformation> WebsiteInfoList = new ArrayList<WebsitesInformation>();
+
+        Cursor cursor = database.rawQuery("SELECT DISTINCT * FROM  records ORDER BY id DESC" ,new String[]{});
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            WebsitesInformation websitesInformation = new WebsitesInformation();
+
+            websitesInformation.id = cursor.getInt(0);
+            websitesInformation.name = cursor.getString(1);
+            websitesInformation.address = cursor.getString(2);
+
+            WebsiteInfoList.add(websitesInformation);
+            cursor.moveToNext();
+        }
+
+        // Make sure to close the cursor
+        cursor.close();
+
+        return WebsiteInfoList;
+    }
+
 }

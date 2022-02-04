@@ -4,14 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -46,10 +52,14 @@ public class Home extends AppCompatActivity {
                 this.getRecords();
             }
 
+
+
             private void getRecords() {
                 SQLiteDatabase db = openOrCreateDatabase("WebsiteDB", Context.MODE_PRIVATE, null);
 
                 lst1 = findViewById(R.id.lvRssHome);
+                registerForContextMenu(lst1);
+
                 final Cursor c = db.rawQuery("select * from records", null);
                 int id = c.getColumnIndex("id");
                 int name = c.getColumnIndex("name");
@@ -95,8 +105,48 @@ public class Home extends AppCompatActivity {
         });
 
     }
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu,v,menuInfo);
+        menu.add(0,v.getId(),0,"Delete");
 
+    }
 
+    public boolean onContextItemSelected(MenuItem item)
+    {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        if(item.getTitle() == "Delete")
+        {
+//            titles.remove(info.position);
+            Delete();
+        }
+
+        return true;
+    }
+
+    public void Delete()
+    {
+        try
+        {
+            String id = "1";
+
+            SQLiteDatabase db = openOrCreateDatabase("WebSiteDB",Context.MODE_PRIVATE,null);
+
+            Log.i("ttttttttttttttt", id);
+
+            String sql = "delete from records where id = ?";
+            SQLiteStatement statement = db.compileStatement(sql);
+
+            statement.bindString(1, id);
+            statement.execute();
+            Toast.makeText(this,"Record Deleted",Toast.LENGTH_LONG).show();
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this,"Record Fail",Toast.LENGTH_LONG).show();
+        }
+    }
 
 
 }

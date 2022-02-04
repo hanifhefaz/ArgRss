@@ -9,6 +9,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 
@@ -40,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getAttributes().windowAnimations = R.style.Fade;
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_main);
         lvRss = (ListView) findViewById(R.id.lvRss);
 
@@ -77,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public class ProcessInBackground extends AsyncTask<Integer, Void, Exception> {
+    public class ProcessInBackground extends AsyncTask<String, Void, Exception> {
 
         ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
 
@@ -90,10 +97,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Exception doInBackground(Integer... integers) {
+        protected Exception doInBackground(String... strings) {
             try {
                 // rss feed site here
-                URL url = new URL("https://moxie.foxnews.com/feedburner/sports.xml");
+//                URL url = new URL("https://moxie.foxnews.com/feedburner/sports.xml");
+                URL url = new URL(strings[0]);
 
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                 DocumentBuilder db = dbf.newDocumentBuilder();

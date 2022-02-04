@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,6 +76,7 @@
 
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,13 +86,13 @@
 
             <ListView
                 android:id="@+id/lvRssHome"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:stateListAnimator="@anim/fadeout"/>
-
 
         </RelativeLayout>
 
